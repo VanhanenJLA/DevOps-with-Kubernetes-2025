@@ -1,0 +1,6 @@
+@LogOutput_HostAddress = http://localhost:5239
+
+GET {{LogOutput_HostAddress}}/greet/
+Accept: application/json
+
+###
