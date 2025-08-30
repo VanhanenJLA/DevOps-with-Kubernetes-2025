@@ -10,7 +10,6 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-
 app.Lifetime.ApplicationStarted.Register(LogPortOnStartup);
 
 if (app.Environment.IsDevelopment())
@@ -20,12 +19,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.MapGet("/greet", (string name) => "Hello " + name)
-    .WithName("Greet")
-    .WithOpenApi();
-
 app.MapHealthChecks("/health");
-
 app.Run();
 void LogPortOnStartup() => app.Logger.LogInformation("Server started in port {}", port);
