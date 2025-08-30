@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHostedService<PrintJob>();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -16,8 +17,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/greet", (string name) => "Hello " + name)
-    .WithName("Greet")
-    .WithOpenApi();
+app.MapHealthChecks("/health");
 
 app.Run();
